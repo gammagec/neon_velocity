@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/Bird.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/background/bird_up.png" id="u"]
+[ext_resource type="Texture2D" path="res://assets/background/bird_down.png" id="d"]
+
+[sub_resource type="SpriteFrames" id="frames1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("d")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 8.0
+}]
+
+[node name="Bird" type="AnimatedSprite2D"]
+script = ExtResource("1")
+sprite_frames = SubResource("frames1")
+animation = &"fly"
+scale = Vector2(1.6, 1.6)

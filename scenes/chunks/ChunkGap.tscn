@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(130, 32)
+
+[node name="ChunkGap" type="Node2D"]
+
+[node name="GroundLeft" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLeft"]
+position = Vector2(65, 16)
+shape = SubResource("1")
+
+[node name="Polygon2D" type="Polygon2D" parent="GroundLeft"]
+polygon = PackedVector2Array(0, 0, 130, 0, 130, 32, 0, 32)
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="GroundRight" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+position = Vector2(270, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundRight"]
+position = Vector2(65, 16)
+shape = SubResource("1")
+
+[node name="Polygon2D" type="Polygon2D" parent="GroundRight"]
+polygon = PackedVector2Array(0, 0, 130, 0, 130, 32, 0, 32)
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="Water" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(130, 6, 270, 6, 270, 260, 130, 260)
+color = Color(0.1, 0.4, 0.7, 1)
+
+[node name="WaterSurface" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(130, 0, 270, 0, 270, 6, 130, 6)
+color = Color(0.55, 0.85, 0.95, 0.9)

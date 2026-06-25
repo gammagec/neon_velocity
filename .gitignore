@@ -1,0 +1,8 @@
+# Godot editor cache — fully regenerated on import, do not commit
+.godot/
+
+# Exported builds — regenerate with build_windows.ps1 / build_macos.ps1
+builds/
+
+# Claude Code local settings (machine-specific)
+.claude/

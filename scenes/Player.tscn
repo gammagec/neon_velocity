@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/DebugBoundingBox.gd" id="2"]
+[ext_resource type="AudioStreamWAV" path="res://assets/audio/jump.wav" id="jumpsfx"]
+[ext_resource type="AudioStreamWAV" path="res://assets/audio/death.wav" id="deathsfx"]
+[ext_resource type="Texture2D" path="res://assets/player/run_0.png" id="r0"]
+[ext_resource type="Texture2D" path="res://assets/player/run_1.png" id="r1"]
+[ext_resource type="Texture2D" path="res://assets/player/run_2.png" id="r2"]
+[ext_resource type="Texture2D" path="res://assets/player/run_3.png" id="r3"]
+[ext_resource type="Texture2D" path="res://assets/player/run_4.png" id="r4"]
+[ext_resource type="Texture2D" path="res://assets/player/run_5.png" id="r5"]
+[ext_resource type="Texture2D" path="res://assets/player/jump_0.png" id="j0"]
+[ext_resource type="Texture2D" path="res://assets/player/dead_0.png" id="d0"]
+
+[sub_resource type="RectangleShape2D" id="shape1"]
+size = Vector2(20, 40)
+
+[sub_resource type="SpriteFrames" id="frames1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("r2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("r3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("r5")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("j0")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("d0")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1")
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("shape1")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(0, -24)
+sprite_frames = SubResource("frames1")
+animation = &"run"
+autoplay = "run"
+
+[node name="DebugBox" type="Node2D" parent="."]
+script = ExtResource("2")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("jumpsfx")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("deathsfx")

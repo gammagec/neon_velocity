@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(400, 32)
+
+[node name="ChunkFlat" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(200, 16)
+shape = SubResource("1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(0, 0, 400, 0, 400, 32, 0, 32)
+color = Color(0.3, 0.7, 0.3, 1)

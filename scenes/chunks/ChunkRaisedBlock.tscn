@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/Obstacle.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ObstacleVisual.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/DebugBoundingBox.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/large_bush.png" id="bush"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/boulder.png" id="boulder"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(400, 32)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(56, 56)
+
+[node name="ChunkRaisedBlock" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(200, 16)
+shape = SubResource("1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(0, 0, 400, 0, 400, 32, 0, 32)
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="Obstacle" type="Area2D" parent="." groups=["obstacles"]]
+script = ExtResource("1")
+collision_layer = 4
+collision_mask = 1
+position = Vector2(190, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+position = Vector2(0, -30)
+shape = SubResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle"]
+position = Vector2(0, -40)
+script = ExtResource("2")
+textures = [ExtResource("bush"), ExtResource("boulder")]
+
+[node name="DebugBox" type="Node2D" parent="Obstacle"]
+script = ExtResource("3")
+box_color = Color(1, 0, 0, 1)

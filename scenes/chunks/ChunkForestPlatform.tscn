@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/Obstacle.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/DebugBoundingBox.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/log_platform.png" id="log"]
+[ext_resource type="Texture2D" path="res://assets/obstacles/thicket.png" id="thicket"]
+
+[sub_resource type="RectangleShape2D" id="ground_shape"]
+size = Vector2(400, 32)
+
+[sub_resource type="RectangleShape2D" id="platform_shape"]
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="thicket_shape"]
+size = Vector2(30, 130)
+
+[node name="ChunkForestPlatform" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(200, 16)
+shape = SubResource("ground_shape")
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground"]
+polygon = PackedVector2Array(0, 0, 400, 0, 400, 32, 0, 32)
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+position = Vector2(120, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, -48)
+shape = SubResource("platform_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+position = Vector2(0, -48)
+texture = ExtResource("log")
+
+[node name="DebugBox" type="Node2D" parent="Platform"]
+script = ExtResource("2")
+box_color = Color(0.2, 0.6, 1, 1)
+
+[node name="Thicket" type="Area2D" parent="." groups=["obstacles"]]
+script = ExtResource("1")
+collision_layer = 4
+collision_mask = 1
+position = Vector2(285, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Thicket"]
+position = Vector2(0, -65)
+shape = SubResource("thicket_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Thicket"]
+position = Vector2(0, -70)
+texture = ExtResource("thicket")
+
+[node name="DebugBox" type="Node2D" parent="Thicket"]
+script = ExtResource("2")
+box_color = Color(1, 0, 0, 1)

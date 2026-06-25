@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/GameOverScreen.gd" id="4"]
+[ext_resource type="AudioStreamWAV" path="res://assets/audio/music.wav" id="5"]
+[ext_resource type="Texture2D" path="res://assets/background/mountains.png" id="mtn"]
+[ext_resource type="Texture2D" path="res://assets/background/forest.png" id="frst"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.55, 0.78, 0.95, 1)
+
+[node name="GroundFill" type="ColorRect" parent="."]
+offset_top = 400.0
+offset_right = 960.0
+offset_bottom = 560.0
+color = Color(0.3, 0.7, 0.3, 1)
+
+[node name="CloudsLayer" type="Node2D" parent="."]
+
+[node name="BirdsLayer" type="Node2D" parent="."]
+
+[node name="MountainsLayer" type="Node2D" parent="."]
+
+[node name="Tile0" type="Sprite2D" parent="MountainsLayer"]
+position = Vector2(0, 200)
+centered = false
+texture = ExtResource("mtn")
+
+[node name="Tile1" type="Sprite2D" parent="MountainsLayer"]
+position = Vector2(960, 200)
+centered = false
+texture = ExtResource("mtn")
+
+[node name="ForestLayer" type="Node2D" parent="."]
+
+[node name="Tile0" type="Sprite2D" parent="ForestLayer"]
+position = Vector2(0, 240)
+centered = false
+texture = ExtResource("frst")
+
+[node name="Tile1" type="Sprite2D" parent="ForestLayer"]
+position = Vector2(960, 240)
+centered = false
+texture = ExtResource("frst")
+
+[node name="World" type="Node2D" parent="."]
+position = Vector2(0, 400)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5")
+autoplay = true
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(160, 400)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3")
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 28
+text = "Score: 0"
+
+[node name="BestLabel" type="Label" parent="HUD"]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 300.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 20
+text = "Best: 0"
+
+[node name="DebugCheckBox" type="CheckBox" parent="HUD"]
+offset_left = 800.0
+offset_top = 20.0
+offset_right = 940.0
+offset_bottom = 50.0
+text = "Debug"
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4")
+
+[node name="Panel" type="Panel" parent="GameOverLayer"]
+offset_left = 280.0
+offset_top = 150.0
+offset_right = 680.0
+offset_bottom = 410.0
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverLayer/Panel"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 380.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+text = "Score: 0"
+
+[node name="HighScoreLabel" type="Label" parent="GameOverLayer/Panel"]
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 380.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "Best: 0"
+
+[node name="RestartButton" type="Button" parent="GameOverLayer/Panel"]
+offset_left = 120.0
+offset_top = 150.0
+offset_right = 280.0
+offset_bottom = 200.0
+text = "Restart"
