@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Godot Project",
+      "type": "shell",
+      "command": "/Applications/Godot.app/Contents/MacOS/Godot",
+      "args": ["--path", "${workspaceFolder}"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Godot Editor",
+      "type": "shell",
+      "command": "/Applications/Godot.app/Contents/MacOS/Godot",
+      "args": ["--path", "${workspaceFolder}", "--editor"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
